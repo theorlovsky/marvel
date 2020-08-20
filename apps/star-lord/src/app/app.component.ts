@@ -12,6 +12,7 @@ export class AppComponent {
   // or just `rating = 3`, for example
   ratingSimple = convertToRating(5, 10);
   ratingControl = new FormControl(3);
+  ratingServer?: number;
 
   ratingSimpleDisabled = false;
 }

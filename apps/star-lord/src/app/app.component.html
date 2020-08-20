@@ -15,3 +15,10 @@
     {{ ratingControl.disabled ? 'Enable' : 'Disable' }}
   </button>
 </div>
+
+<br>
+
+<div class="rating-container">
+  <span>Server Rating: {{ ratingServer || 'unknown' }}</span>
+  <marvel-rating syncUrl="http://localhost/"></marvel-rating>
+</div>
