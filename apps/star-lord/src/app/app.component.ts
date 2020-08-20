@@ -6,7 +6,7 @@ import { convertToRating } from '@marvel/shared/ui-rating';
   selector: 'marvel-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   // or just `rating = 3`, for example

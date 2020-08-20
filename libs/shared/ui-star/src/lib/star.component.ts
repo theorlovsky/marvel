@@ -5,7 +5,7 @@ import { StarFill } from './star-fill';
   selector: 'marvel-star',
   templateUrl: './star.component.html',
   styleUrls: ['./star.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StarComponent {
   @Input() readonly fill: StarFill = StarFill.empty;

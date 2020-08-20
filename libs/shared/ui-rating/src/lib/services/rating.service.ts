@@ -6,8 +6,7 @@ import { EMPTY, Observable } from 'rxjs';
 export class RatingService {
   private url: string | null = null;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   setUrl(url: string | null): void {
     this.url = url;

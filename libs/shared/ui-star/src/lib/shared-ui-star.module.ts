@@ -6,7 +6,6 @@ import { StarComponent } from './star.component';
 @NgModule({
   imports: [CommonModule],
   declarations: [StarComponent, StarFillPipe],
-  exports: [StarComponent]
+  exports: [StarComponent],
 })
-export class SharedUiStarModule {
-}
+export class SharedUiStarModule {}

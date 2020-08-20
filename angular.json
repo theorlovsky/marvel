@@ -21,13 +21,8 @@
             "polyfills": "apps/star-lord/src/polyfills.ts",
             "tsConfig": "apps/star-lord/tsconfig.app.json",
             "aot": true,
-            "assets": [
-              "apps/star-lord/src/favicon.ico",
-              "apps/star-lord/src/assets"
-            ],
-            "styles": [
-              "apps/star-lord/src/styles.scss"
-            ],
+            "assets": ["apps/star-lord/src/favicon.ico", "apps/star-lord/src/assets"],
+            "styles": ["apps/star-lord/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -81,14 +76,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/star-lord/tsconfig.app.json",
-              "apps/star-lord/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/star-lord/**/*"
-            ]
+            "tsConfig": ["apps/star-lord/tsconfig.app.json", "apps/star-lord/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!apps/star-lord/**/*"]
           }
         },
         "test": {
@@ -123,13 +112,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/star-lord-e2e/tsconfig.e2e.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/star-lord-e2e/**/*"
-            ]
+            "tsConfig": ["apps/star-lord-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/star-lord-e2e/**/*"]
           }
         }
       }
@@ -143,14 +127,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/shared/ui-rating/tsconfig.lib.json",
-              "libs/shared/ui-rating/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/ui-rating/**/*"
-            ]
+            "tsConfig": ["libs/shared/ui-rating/tsconfig.lib.json", "libs/shared/ui-rating/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/ui-rating/**/*"]
           }
         },
         "test": {
@@ -178,14 +156,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "libs/shared/ui-star/tsconfig.lib.json",
-              "libs/shared/ui-star/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/ui-star/**/*"
-            ]
+            "tsConfig": ["libs/shared/ui-star/tsconfig.lib.json", "libs/shared/ui-star/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/shared/ui-star/**/*"]
           }
         },
         "test": {

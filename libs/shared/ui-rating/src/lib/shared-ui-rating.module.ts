@@ -8,6 +8,6 @@ import { RatingComponent } from './rating.component';
 @NgModule({
   imports: [CommonModule, SharedUiStarModule, HttpClientModule],
   declarations: [RatingComponent, SyncUrlDirective],
-  exports: [RatingComponent, SyncUrlDirective]
+  exports: [RatingComponent, SyncUrlDirective],
 })
 export class SharedUiRatingModule {}

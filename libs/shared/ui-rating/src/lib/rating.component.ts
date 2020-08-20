@@ -8,7 +8,7 @@ import {
   OnInit,
   Optional,
   Output,
-  Self
+  Self,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { StarFill } from '@marvel/shared/ui-star';
@@ -26,7 +26,7 @@ type OnTouchedFn = () => void;
   selector: 'marvel-rating',
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingComponent implements ControlValueAccessor, OnInit {
   @Output() readonly ratingChange = new EventEmitter<number>();
@@ -58,16 +58,14 @@ export class RatingComponent implements ControlValueAccessor, OnInit {
 
     this.starFills$ = this.ratingSubject.pipe(
       distinctUntilChanged(),
-      map((rating) => this.mapToStarFills(rating))
+      map((rating) => this.mapToStarFills(rating)),
     );
   }
 
   ngOnInit(): void {
-    this.ngControl?.valueChanges
-      ?.pipe(untilDestroyed(this))
-      .subscribe((rating) => {
-        this.ratingSubject.next(rating);
-      });
+    this.ngControl?.valueChanges?.pipe(untilDestroyed(this)).subscribe((rating) => {
+      this.ratingSubject.next(rating);
+    });
   }
 
   changeRating(rating: number): void {

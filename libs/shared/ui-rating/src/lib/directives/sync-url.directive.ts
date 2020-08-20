@@ -9,7 +9,7 @@ import { RatingService } from '../services/rating.service';
 @Directive({
   // tslint:disable-next-line:directive-selector
   selector: 'marvel-rating[syncUrl]',
-  providers: [RatingService]
+  providers: [RatingService],
 })
 export class SyncUrlDirective implements OnInit {
   @Input()
@@ -18,36 +18,24 @@ export class SyncUrlDirective implements OnInit {
 
     this.ratingService
       .getRating()
-      .pipe(
-        this.catchServiceError('Couldn\'t get rating from the server'),
-        untilDestroyed(this)
-      )
+      .pipe(this.catchServiceError("Couldn't get rating from the server"), untilDestroyed(this))
       .subscribe((rating) => {
         this.ratingComponent.rating = rating;
       });
   }
 
-  constructor(
-    @Self() private ratingComponent: RatingComponent,
-    @Self() private ratingService: RatingService
-  ) {
-  }
+  constructor(@Self() private ratingComponent: RatingComponent, @Self() private ratingService: RatingService) {}
 
   ngOnInit(): void {
-    this.ratingComponent.ratingChange
-      .pipe(untilDestroyed(this))
-      .subscribe((rating) => {
-        this.syncWithServer(rating);
-      });
+    this.ratingComponent.ratingChange.pipe(untilDestroyed(this)).subscribe((rating) => {
+      this.syncWithServer(rating);
+    });
   }
 
   private syncWithServer(rating: number): void {
     this.ratingService
       .saveRating(rating)
-      .pipe(
-        this.catchServiceError('Rating wasn\'t saved'),
-        untilDestroyed(this)
-      )
+      .pipe(this.catchServiceError("Rating wasn't saved"), untilDestroyed(this))
       .subscribe(() => {
         this.ratingComponent.rating = rating;
       });
