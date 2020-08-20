@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { StarFill } from '@marvel/shared/ui-star';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,6 +12,8 @@ export const ratingStarsNumber = 5;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {
+  @Output() readonly ratingChange = new EventEmitter<number>();
+
   readonly starFills$: Observable<StarFill[]>;
 
   @Input()
@@ -25,6 +27,10 @@ export class RatingComponent {
     this.starFills$ = this.ratingSubject.pipe(
       map((rating) => this.mapToStarFills(rating))
     );
+  }
+
+  changeRating(rating: number): void {
+    this.ratingChange.emit(rating);
   }
 
   private mapToStarFills(starsFilled: number): StarFill[] {
