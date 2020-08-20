@@ -1,1 +1,17 @@
-<marvel-rating [(rating)]="rating"></marvel-rating>
+<div class="rating-container">
+  <span>Simple Rating: {{ ratingSimple }}</span>
+  <marvel-rating [(rating)]="ratingSimple" [disabled]="ratingSimpleDisabled"></marvel-rating>
+  <button type="button" (click)="ratingSimpleDisabled = !ratingSimpleDisabled">
+    {{ ratingSimpleDisabled ? 'Enable' : 'Disable' }}
+  </button>
+</div>
+
+<br>
+
+<div class="rating-container">
+  <span>FormControl Rating: {{ ratingControl.value }}</span>
+  <marvel-rating [formControl]="ratingControl"></marvel-rating>
+  <button type="button" (click)="ratingControl.disabled ? ratingControl.enable() : ratingControl.disable()">
+    {{ ratingControl.disabled ? 'Enable' : 'Disable' }}
+  </button>
+</div>

@@ -1,17 +1,34 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Optional,
+  Output,
+  Self
+} from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { StarFill } from '@marvel/shared/ui-star';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 
 export const ratingStarsNumber = 5;
 
+type OnChangedFn = (rating: number) => void;
+type OnTouchedFn = () => void;
+
+@UntilDestroy()
 @Component({
   selector: 'marvel-rating',
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent {
+export class RatingComponent implements ControlValueAccessor, OnInit {
   @Output() readonly ratingChange = new EventEmitter<number>();
 
   readonly starFills$: Observable<StarFill[]>;
@@ -21,16 +38,61 @@ export class RatingComponent {
     this.ratingSubject.next(rating);
   }
 
+  @Input()
+  set disabled(disabled: boolean) {
+    this.isDisabled = coerceBooleanProperty(disabled);
+  }
+
   private readonly ratingSubject = new BehaviorSubject<number>(0);
 
-  constructor() {
+  @HostBinding('class.disabled')
+  private isDisabled = false;
+
+  private onChanged?: OnChangedFn;
+  private onTouched?: OnTouchedFn;
+
+  constructor(@Optional() @Self() private ngControl?: NgControl) {
+    if (this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
+
     this.starFills$ = this.ratingSubject.pipe(
+      distinctUntilChanged(),
       map((rating) => this.mapToStarFills(rating))
     );
   }
 
+  ngOnInit(): void {
+    this.ngControl?.valueChanges
+      ?.pipe(untilDestroyed(this))
+      .subscribe((rating) => {
+        this.ratingSubject.next(rating);
+      });
+  }
+
   changeRating(rating: number): void {
+    if (this.isDisabled) {
+      return;
+    }
+
+    this.setControlValue(rating);
     this.ratingChange.emit(rating);
+  }
+
+  registerOnChange(fn: OnChangedFn): void {
+    this.onChanged = fn;
+  }
+
+  registerOnTouched(fn: OnTouchedFn): void {
+    this.onTouched = fn;
+  }
+
+  writeValue(rating: number): void {
+    this.ratingSubject.next(rating);
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
   }
 
   private mapToStarFills(starsFilled: number): StarFill[] {
@@ -47,5 +109,10 @@ export class RatingComponent {
 
       return StarFill.empty;
     });
+  }
+
+  private setControlValue(rating: number): void {
+    this.onChanged?.(rating);
+    this.onTouched?.();
   }
 }

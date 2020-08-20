@@ -1,12 +1,14 @@
 :host {
   display: inline-flex;
-}
 
-marvel-star {
-  cursor: pointer;
+  &:not(.disabled) {
+    marvel-star {
+      cursor: pointer;
 
-  &:hover {
-    transform: scale(1.2);
-    transition: transform .1s;
+      &:hover {
+        transform: scale(1.2);
+        transition: transform .1s;
+      }
+    }
   }
 }
