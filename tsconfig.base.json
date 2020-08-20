@@ -15,7 +15,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@marvel/shared/ui-rating": ["libs/shared/ui-rating/src/index.ts"],
+      "@marvel/shared/ui-star": ["libs/shared/ui-star/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

@@ -18,12 +18,7 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "accessToken": "NTRjMTk5NGItZTNjYS00OWM5LWI2YmEtZGQ4OTVkOGU5MzJlfHJlYWQtd3JpdGU=",
-        "cacheableOperations": [
-          "build",
-          "test",
-          "lint",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "test", "lint", "e2e"],
         "canTrackAnalytics": false,
         "showUsageWarnings": true
       }
@@ -31,13 +26,17 @@
   },
   "projects": {
     "star-lord": {
-      "tags": []
+      "tags": ["type:app"]
     },
     "star-lord-e2e": {
-      "tags": [],
-      "implicitDependencies": [
-        "star-lord"
-      ]
+      "tags": ["type:e2e"],
+      "implicitDependencies": ["star-lord"]
+    },
+    "shared-ui-rating": {
+      "tags": ["type:ui", "scope:shared"]
+    },
+    "shared-ui-star": {
+      "tags": ["type:ui", "scope:shared"]
     }
   }
 }

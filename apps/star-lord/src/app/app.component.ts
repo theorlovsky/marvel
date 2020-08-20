@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { convertToRating } from '@marvel/shared/ui-rating';
 
 @Component({
   selector: 'marvel-root',
@@ -7,5 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
-  title = 'star-lord';
+  // or just `rating = 3`, for example
+  rating = convertToRating(5, 10);
 }
