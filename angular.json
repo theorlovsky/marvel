@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "projects": {
+    "star-lord": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/star-lord",
+      "sourceRoot": "apps/star-lord/src",
+      "prefix": "marvel",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/star-lord",
+            "index": "apps/star-lord/src/index.html",
+            "main": "apps/star-lord/src/main.ts",
+            "polyfills": "apps/star-lord/src/polyfills.ts",
+            "tsConfig": "apps/star-lord/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/star-lord/src/favicon.ico",
+              "apps/star-lord/src/assets"
+            ],
+            "styles": ["apps/star-lord/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/star-lord/src/environments/environment.ts",
+                  "with": "apps/star-lord/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "star-lord:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "star-lord:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "star-lord:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/star-lord/tsconfig.app.json",
+              "apps/star-lord/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/star-lord/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/star-lord/jest.config.js",
+            "tsConfig": "apps/star-lord/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "apps/star-lord/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "star-lord-e2e": {
+      "root": "apps/star-lord-e2e",
+      "sourceRoot": "apps/star-lord-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/star-lord-e2e/cypress.json",
+            "tsConfig": "apps/star-lord-e2e/tsconfig.e2e.json",
+            "devServerTarget": "star-lord:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "star-lord:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/star-lord-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/star-lord-e2e/**/*"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "tslint"
+      },
+      "library": {
+        "linter": "tslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "star-lord"
+}
