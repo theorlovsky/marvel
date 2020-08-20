@@ -169,6 +169,9 @@
     },
     "@nrwl/angular:library": {
       "unitTestRunner": "jest"
+    },
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush"
     }
   },
   "defaultProject": "star-lord"
